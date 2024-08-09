@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect} from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
@@ -21,11 +22,14 @@ import LoginPage  from "./LoginPage";
 
 import { getAuthToken, clearAuthToken }  from "../lib/utils";
 
+import { getAPI } from "@/lib/api";
+
 export default function Header() {
 	const { theme, toggleTheme } = useTheme();
 	const [showProfile, setShowProfile] = useState(false);
 	const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
 	const [showLoginPage, setShowLoginPage] = useState(false);
+	const [profile, setProfile] = useState(null);
 	const heroRef = useRef(null);
 	const contactRef = useRef(null);
 	const featuredRef = useRef(null);
@@ -45,6 +49,23 @@ export default function Header() {
 		}
 	};
 
+	useEffect(() =>
+	{
+		console.log("hello");
+		const fetchProfile = async () =>
+		{
+			if(showProfile)
+			{
+				const { user_id } = JSON.parse(localStorage.getItem("userInformation"));
+
+				const data = await getAPI(`users/${user_id}`);	
+				setProfile(data);
+			}
+		}
+		fetchProfile();
+	}, [showProfile]);
+
+	console.log(profile);
 
 	return (
 		<>
@@ -180,7 +201,7 @@ export default function Header() {
 				>
 					<div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full relative">
 						<ProfileCard
-							name="Rajesh Hamal"
+							name={profile && (profile.first_name + " " + profile.last_name) || "Rajesh Hamal"}
 							category="Landlord"
 							photo={Rajesh_image.src}
 							description="I am an Actor in Nepali Cinema (Mahanayak)."

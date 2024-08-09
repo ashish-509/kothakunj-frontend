@@ -32,11 +32,12 @@ const LoginPage = ({ onLogin, onClose }) =>
 			});
 
 			const responseJSON =  await response.json();
-			console.log(responseJSON.data);
+
 
 			if (response.ok)
 			{
 				setAuthToken(responseJSON.data.token);
+				localStorage.setItem("userInformation", JSON.stringify(responseJSON.data.user));
 				alert("Login successful");
 				onLogin();
 			}

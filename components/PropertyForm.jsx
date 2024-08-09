@@ -4,8 +4,6 @@ import { postAPI } from "@/lib/api";
 
 
 const PropertyForm = () => {
-  const [province, setProvince] = useState("");
-  const [districts, setDistricts] = useState([]);
   const [formData, setFormData] = useState({
     city: "",
     area: "",
@@ -17,35 +15,38 @@ const PropertyForm = () => {
     rent: 0,
     priceRange: "",
     amenities: [],
-    furnished: "",
-    preferredGender: "",
+    furnished: 0,
+    preferredGender: "Male",
     description: "",
     houseFrontPicture: null,
     gallery: null,
   });
   const { theme } = useTheme();
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      setFormData((prevData) => ({
-        ...prevData,
-        amenities: checked
-          ? [...prevData.amenities, value]
-          : prevData.amenities.filter((amenity) => amenity !== value),
-      }));
-    } else if (type === "file") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: e.target.files[0],
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-  };
+	const handleInputChange = (e) => {
+		const { name, value, type, checked } = e.target;
+		console.log("Input changed");
+		console.log(name, value, type, checked);
+		if (type === "checkbox")
+		{
+			setFormData((prevData) => ({
+				...prevData,
+				amenities: checked
+				? [...prevData.amenities, value]
+				: prevData.amenities.filter((amenity) => amenity !== value),
+			}));
+		} else if (type === "file") {
+			setFormData((prevData) => ({
+				...prevData,
+				[name]: e.target.files[0],
+			}));
+		} else {
+			setFormData((prevData) => ({
+				...prevData,
+				[name]: value,
+			}));
+		}
+	};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,15 +62,7 @@ const PropertyForm = () => {
     try {
 		const data = await postAPI("rooms", formPayload, { "Content-Type": "application/json", Authorization: `Bearer ${token}`, });
       	console.log(data);
-
-
-      if (response.ok) {
-        alert("Property posted successfully!");
-        // Reset form or handle success
-      } else {
-        alert("Failed to post property.");
-        // Handle error
-      }
+		alert("Data has finally been successfully posted");
     } catch (error) {
       console.error("Error posting property:", error);
       alert("An error occurred while posting the property.");
@@ -222,7 +215,7 @@ const PropertyForm = () => {
                 className={`w-full p-2 border border-gray-300 rounded ${
                   theme === "dark" ? "bg-gray-700 text-white" : ""
                 }`}
-                type="number"
+                type="bool"
                 name="extraRoom"
                 min="0"
                 value={formData.extraRoom}
@@ -269,10 +262,10 @@ const PropertyForm = () => {
                 <option value="" disabled>
                   Choose
                 </option>
-                <option value="Below 10000">Below 10000</option>
-                <option value="10000-20000">10000-20000</option>
-                <option value="20000-30000">20000-30000</option>
-                <option value="Above 30000">Above 30000</option>
+                <option value="Below 10k">Below 10000</option>
+                <option value="10k-20k">10000-20000</option>
+                <option value="20k-30k">20000-30000</option>
+                <option value="Above 30k">Above 30000</option>
               </select>
             </div>
           </div>
@@ -332,13 +325,14 @@ const PropertyForm = () => {
                 className={`w-full p-2 border border-gray-300 rounded ${
                   theme === "dark" ? "bg-gray-700 text-white" : ""
                 }`}
+	  			
                 name="furnished"
                 value={formData.furnished}
                 onChange={handleInputChange}
               >
                 <option value="">Choose</option>
-                <option value="furnished">Furnished</option>
-                <option value="unfurnished">Unfurnished</option>
+                <option value="true">Furnished</option>
+                <option value="false">Unfurnished</option>
               </select>
             </div>
             <div>
@@ -350,16 +344,14 @@ const PropertyForm = () => {
                 Preferred gender
               </label>
               <select
-                className={`w-full p-2 border border-gray-300 rounded ${
-                  theme === "dark" ? "bg-gray-700 text-white" : ""
-                }`}
+                className={`w-full p-2 border border-gray-300 rounded ${ theme === "dark" ? "bg-gray-700 text-white" : "" }`}
                 name="preferredGender"
                 value={formData.preferredGender}
                 onChange={handleInputChange}
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <option value="Mixed / Any">Mixed / Any</option>
+                <option value="Mixed">Mixed / Any</option>
                 <option value="Other">Other</option>
               </select>
             </div>
