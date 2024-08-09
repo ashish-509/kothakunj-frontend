@@ -15,7 +15,7 @@ const SearchResults = ({ results }) => {
 		if (selectedProperty !== id) {
 			try {
 				const response = await axios.get(
-					`http://localhost:5000/api/v1/reviews/${id}`
+					`https://kothakunj-backend-1.onrender.com/api/v1/reviews/${id}`
 				);
 				setReviews(response.data);
 			} catch (error) {
@@ -46,7 +46,7 @@ const SearchResults = ({ results }) => {
 		}
 		try {
 			const response = await axios.post(
-				"http://localhost:5000/api/v1/reviews",
+				"https://kothakunj-backend-1.onrender.com/api/v1/reviews",
 				{
 					room_id: results[currentIndex].id,
 					user_id: 1, // Replace with actual user ID

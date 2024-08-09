@@ -24,7 +24,7 @@ const Contact = () => {
 		console.log(formData);
 		try {
 			const response = await axios.post(
-				"http://localhost:5000/api/v1/mail/send",
+				"https://kothakunj-backend-1.onrender.com/api/v1/mail/send",
 				formData
 			);
 			setResponseMessage(response.data.message);

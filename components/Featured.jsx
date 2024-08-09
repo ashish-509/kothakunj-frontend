@@ -14,7 +14,7 @@ const Featured = () => {
 		{
 			try
 			{
-				const response = await axios.get("http://localhost:5000/api/v1/rooms");
+				const response = await axios.get("https://kothakunj-backend-1.onrender.com/api/v1/rooms");
 				console.log(response.data);
 				setRooms(response.data.data);
 			}

@@ -10,7 +10,7 @@ const SearchPage = () => {
 
   const handleSearch = async (criteria) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/search", {
+      const response = await axios.get("https://kothakunj-backend-1.onrender.com/api/v1/search", {
         params: criteria,
       });
       setResults(response.data);
