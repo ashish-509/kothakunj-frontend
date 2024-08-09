@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Hero_image from "../public/Images/Hero_image.png";
+import Hero_image from "../public/static/Images/Hero_image.png";
 import { useTheme } from "../lib/ThemeContext";
 
 const Hero = () => {

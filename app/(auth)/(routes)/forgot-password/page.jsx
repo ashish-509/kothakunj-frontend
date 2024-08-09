@@ -1,1 +1,5 @@
-//to be implemented
+export default function page() {
+  return (
+    <div>page</div>
+  )
+}

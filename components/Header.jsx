@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 
-import Logo from "../public/Images/logo.png";
-import Rajesh_image from "../public/Images/Profile/RajeshHamal.jpeg";
+import Logo from "../public/static/Images/logo.png";
+import Rajesh_image from "../public/static/Images/Profile/RajeshHamal.jpeg";
 import { useTheme } from "../lib/ThemeContext";
 
 import ProfileCard from "./ProfileCard";

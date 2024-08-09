@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../public/Images/logo.png";
+import Logo from "../public/static/Images/logo.png";
 import { useTheme } from "../lib/ThemeContext";
 
 export default function Footer() {

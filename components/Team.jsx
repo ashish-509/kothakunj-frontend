@@ -2,9 +2,9 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Ashish from '../public/Images/TeamsImages/Ashish.jpg';
-import Mukesh from '../public/Images/TeamsImages/Mukesh.jpg';
-import Jatin from  '../public/Images/TeamsImages/Jatin.jpg';
+import Ashish from '../public/static/Images/TeamsImages/Ashish.jpg';
+import Mukesh from '../public/static/Images/TeamsImages/Mukesh.jpg';
+import Jatin from  '../public/static/Images/TeamsImages/Jatin.jpg';
 import { useTheme } from "../lib/ThemeContext";
 
 const teamMembers = 

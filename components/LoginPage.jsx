@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Logo from "../public/Images/logo.png";
+import Logo from "../public/static/Images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { setAuthToken }  from "../lib/utils";
