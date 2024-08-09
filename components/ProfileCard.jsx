@@ -41,9 +41,9 @@ const ProfileCard = ({
         </div>
         <div className="text-center mb-4">
           <h2 className="text-2xl font-bold mb-1">
-            {first_name} {last_name}
+            Name :{first_name} + " " + {last_name}
           </h2>
-          <p className="text-lg text-green-500">{email}</p>
+          <p className="text-lg text-green-500">Email : {email}</p>
         </div>
         <div className="mb-6 text-center">
           <h3 className="text-xl font-semibold mb-2">Contact Information</h3>
@@ -68,10 +68,20 @@ ProfileCard.defaultProps = {
   photo: null,
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  // Extract user ID from the context (you might need to adjust this based on your auth setup)
+  const { req } = context;
+  const userId = req.cookies.userId; // Adjust based on how you store the user ID in cookies/session
+
+  if (!userId) {
+    return {
+      notFound: true,
+    };
+  }
+
   try {
     const res = await fetch(
-      "https://kothakunj-backend-1.onrender.com/api/user"
+      `https://kothakunj-backend-1.onrender.com/api/v1/users/${userId}`
     );
     if (!res.ok) {
       throw new Error(`Failed to fetch user data: ${res.statusText}`);
