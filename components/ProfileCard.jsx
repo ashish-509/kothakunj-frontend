@@ -1,111 +1,92 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Image from "next/image";
-import { useTheme } from "../lib/ThemeContext";
+import { useEffect, useState } from "react";
 
-const ProfileCard = ({
-  first_name,
-  last_name,
-  phone_number,
-  address,
-  email,
-  photo,
-}) => {
-  const { theme } = useTheme();
+// Helper function to fetch data from the API
+const fetchDataFromAPI = async (endpoint) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/v1/${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching data from API:", error);
+    return null;
+  }
+};
+
+const ProfileCard = () => {
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        // Retrieve user information from localStorage
+        const storedUserInfo = localStorage.getItem("userInformation");
+        console.log("Stored User Info:", storedUserInfo);
+
+        if (storedUserInfo) {
+          const { user_id } = JSON.parse(storedUserInfo);
+          console.log("User ID:", user_id);
+
+          // Make API call to fetch user data
+          const data = await fetchDataFromAPI(`users/${user_id}`);
+          console.log("Fetched Data:", data);
+
+          if (data) {
+            setProfile(data);
+          } else {
+            setError("No data returned from the API.");
+          }
+        } else {
+          setError("No user information found in localStorage.");
+        }
+      } catch (error) {
+        setError("Error fetching profile data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <div
-      className={`pb-11 pt-11 ${
-        theme === "dark" ? "bg-black text-white" : "bg-custom-gray text-black"
-      }`}
-    >
-      <div className="max-w-md mx-auto p-6 rounded-lg shadow-md">
-        <div className="flex justify-center mb-4">
-          <div className="w-24 h-24 bg-gray-300 rounded-full overflow-hidden">
-            {photo ? (
-              <Image
-                src={photo}
-                alt={`${first_name} ${last_name} Profile Picture`}
-                layout="responsive"
-                width={96}
-                height={96}
-                className="rounded-full object-cover"
-                priority
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <span className="text-gray-500">No Photo</span>
-              </div>
-            )}
-          </div>
+    <div className="max-w-sm mx-auto bg-white border border-gray-300 rounded-lg shadow-md p-6 text-center text-black">
+      {profile ? (
+        <div className="profile-details">
+          <img
+            src="https://www.gravatar.com/avatar?d=mp"
+            alt="Default user"
+            className="w-24 h-24 rounded-full mx-auto mb-4"
+          />
+          <h1 className="text-xl font-bold mb-4 p-4">
+            Name: {profile.first_name} {profile.last_name}
+          </h1>
+          <p className="text-gray-700 mb-2 p-3">Email: {profile.email}</p>
+          <p className="text-gray-700 mb-2 p-3">Phone: {profile.phone_number}</p>
+          <p className="text-gray-700 mb-2 p-3">Address: {profile.address}</p>
         </div>
-        <div className="text-center mb-4">
-          <h2 className="text-2xl font-bold mb-1">
-            Name :{first_name} + " " + {last_name}
-          </h2>
-          <p className="text-lg text-green-500">Email : {email}</p>
-        </div>
-        <div className="mb-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">Contact Information</h3>
-          <p className="text-center">Phone: {phone_number}</p>
-          <p className="text-center">Address: {address}</p>
-        </div>
-      </div>
+      ) : (
+        <p>No profile data available.</p>
+      )}
     </div>
   );
 };
-
-ProfileCard.propTypes = {
-  first_name: PropTypes.string.isRequired,
-  last_name: PropTypes.string.isRequired,
-  phone_number: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  photo: PropTypes.string,
-};
-
-ProfileCard.defaultProps = {
-  photo: null,
-};
-
-export async function getServerSideProps(context) {
-  // Extract user ID from the context (you might need to adjust this based on your auth setup)
-  const { req } = context;
-  const userId = req.cookies.userId; // Adjust based on how you store the user ID in cookies/session
-
-  if (!userId) {
-    return {
-      notFound: true,
-    };
-  }
-
-  try {
-    const res = await fetch(
-      `https://kothakunj-backend-1.onrender.com/api/v1/users/${userId}`
-    );
-    if (!res.ok) {
-      throw new Error(`Failed to fetch user data: ${res.statusText}`);
-    }
-
-    const data = await res.json();
-
-    return {
-      props: {
-        first_name: data.first_name || "First Name",
-        last_name: data.last_name || "Last Name",
-        phone_number: data.phone_number || "No Phone Number",
-        address: data.address || "No Address",
-        email: data.email || "No Email",
-        photo: data.photo || null,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-
-    return {
-      notFound: true,
-    };
-  }
-}
 
 export default ProfileCard;

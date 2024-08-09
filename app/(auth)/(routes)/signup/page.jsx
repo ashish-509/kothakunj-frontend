@@ -33,7 +33,8 @@ export default function Register() {
     }
 
     axios
-      .post("https://kothakunj-backend-1.onrender.com/api/v1/users/register", {
+      // .post("https://kothakunj-backend-1.onrender.com/api/v1/users/register", {
+        .post("https://localhost:5000/api/v1/users/register", {
         first_name: formData.firstName,
         last_name: formData.lastName,
         phone: formData.phone,
