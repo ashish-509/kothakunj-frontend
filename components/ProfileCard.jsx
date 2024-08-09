@@ -14,7 +14,7 @@ const ProfileCard = ({
   const { theme } = useTheme();
 
   return (
-    <div className={`pb-11 pt-11 ${theme === 'dark' ? 'bg-black text-white' : 'bg-custom-gray text-black'}`}>
+    <div className={`pb-11 pt-11 ${theme === "dark" ? "bg-black text-white" : "bg-custom-gray text-black"}`}>
       <div className="max-w-md mx-auto p-6 rounded-lg">
         <div className="flex justify-center mb-4">
           <div className="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
@@ -44,16 +44,16 @@ const ProfileCard = ({
               <span
                 key={index}
                 className={`text-yellow-400 ${
-                  index < rating ? 'text-yellow-400' : 'text-gray-500'
+                  index < rating ? "text-yellow-400" : "text-gray-500"
                 }`}
               >
-                {index < rating ? '★' : '☆'}
+                {index < rating ? "★" : "☆"}
               </span>
             ))}
           </div>
           <p className="text-center">
             <span className="text-white-800 font-bold">{reviewAuthor}</span>
-            {' -- '}
+            {" -- "}
             {reviews}
           </p>
         </div>
