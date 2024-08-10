@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // Helper function to fetch data from the API
 const fetchDataFromAPI = async (endpoint) => {
   try {
-    const response = await fetch(`http://localhost:5000/api/v1/${endpoint}`, {
+    const response = await fetch(`https://kothakunj-backend-1.onrender.com/api/v1/${endpoint}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
