@@ -97,13 +97,13 @@ export default function Header() {
 					>
 						Contact Us
 					</a>
-					<a
+					{/* <a
 						href="#search"
 						className="hover:text-orange-500 transition duration-300 ease-in-out pl-14 text-xl"
 						onClick={() => searchFormRef.current?.scrollIntoView({ behavior: "smooth" })}
 					>
 						Search
-					</a>
+					</a> */}
 					<a
 						href="#add"
 						className="hover:text-orange-500 transition duration-300 ease-in-out pl-10 text-xl"
