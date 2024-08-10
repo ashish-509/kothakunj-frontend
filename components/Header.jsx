@@ -182,9 +182,9 @@ export default function Header() {
 				<Contact />
 			</div>
 
-			<div ref={searchFormRef}>
+			{/* <div ref={searchFormRef}>
 				<SearchPage />
-			</div>
+			</div> */}
 
 			<div ref={addRef}>
 				<PropertyForm />

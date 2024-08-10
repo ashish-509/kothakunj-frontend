@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kothakunj
 
-## Getting Started
+Kothakunj is basically a room finding or posting your rental spase. With the motive to eliminate middle mens in rental sector kothakunj was developed as out DBMS project.
 
-First, run the development server:
+## kothakunj (https://kothakunj.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Team Members
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Ashish Kandel](https://github.com/ashish-509) [Backend]
+- [Mukesh Bhatta](https://github.com/mukesh875bhatta) [Database]
+- [Jatin Raut](https://github.com/jatinraut4) [Frontend]
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Tools and Technologies used : 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- NextJs (Frontend)
+- NodeJs, Express (Bckend)
+- PostgreSQL (Database)
+- vercel (Hosting Frontend)
+- render (Hosting Database and Backend)
 
-## Learn More
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
+- Post (Add) rooms
+- Get (Read) listed rooms
+- Contact us
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### User Management
+Kothakunj includes following features for user Management : 
+- Register
+- Login
+- Maintain profiles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# To run our project on local machine :
 
-## Deploy on Vercel
+    1) [clone frontend] (git clone https://github.com/ashish-509/kothakunj-frontend)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    2) [clone backend] (git clone https://github.com/ashish-509/kothakunj-backend)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    3) run frontend on local server : npm run dev
+
+    4) run backend on local server : npm run start
+
+    5) Build command : npm run build

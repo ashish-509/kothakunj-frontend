@@ -28,8 +28,8 @@ export default function Register() {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      setErrorMessage("Passwords do not match!");
       alert("Passwords do not match!");
+      setErrorMessage("Passwords do not match!");
       return;
     }
 
@@ -44,13 +44,13 @@ export default function Register() {
         password: formData.password,
       })
       .then((response) => {
-        console.log("User registered successfully:", response.data);
         alert("User registered successfully!");
+        console.log("User registered successfully:", response.data);
         // Handle successful registration (e.g., redirect or display success message)
       })
       .catch((error) => {
+        // alert("There was an error registering the user!");
         console.error("There was an error registering the user!", error);
-        alert("There was an error registering the user!");
         // Handle registration error (e.g., display error message)
       });
   };
