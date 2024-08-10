@@ -4,6 +4,11 @@ Kothakunj is basically a room finding or posting your rental spase. With the mot
 
 ## kothakunj (https://kothakunj.vercel.app/)
 
+## Project repos :
+
+- [Frontend] (https://github.com/ashish-509/kothakunj-frontend)
+- [Backend] (https://github.com/ashish-509/kothakunj-backend)
+
 ## Team Members
 
 - [Ashish Kandel](https://github.com/ashish-509) [Backend]
